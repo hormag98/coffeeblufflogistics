@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0A0A0A;
+  --foreground: #FFFFFF;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-poppins), sans-serif;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .gold-glow {
+    box-shadow: 0 0 20px rgba(207, 181, 59, 0.3), 0 0 40px rgba(207, 181, 59, 0.1);
+  }
+  .purple-glow {
+    box-shadow: 0 0 20px rgba(59, 31, 94, 0.6), 0 0 40px rgba(59, 31, 94, 0.3);
+  }
+}
