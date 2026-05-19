@@ -30,7 +30,7 @@ const services = [
     coming: false,
   },
   {
-    icon: "🤝",
+    icon: "🤝🏾",
     title: "Freight Brokerage",
     desc: "Tap our carrier network for competitive rates and capacity on demand. We match your freight to the right asset every time.",
     coming: true,
