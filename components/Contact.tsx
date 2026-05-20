@@ -36,7 +36,8 @@ export default function Contact() {
     };
 
     const supabase = createClient();
-    const { error: sbError } = await supabase.from("quote_requests").insert([data]);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error: sbError } = await supabase.from("quote_requests").insert([data] as any);
 
     if (sbError) {
       setError("Something went wrong. Please try again or call us directly.");
