@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import { createClient } from "@/lib/supabase";
 
 const contactDetails = [
   { icon: "📍", label: "Savannah, Georgia 31419" },
@@ -18,10 +19,31 @@ export default function Contact() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+
+    const form = e.currentTarget;
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      company: (form.elements.namedItem("company") as HTMLInputElement).value || null,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
+
+    const supabase = createClient();
+    const { error: sbError } = await supabase.from("quote_requests").insert([data]);
+
+    if (sbError) {
+      setError("Something went wrong. Please try again or call us directly.");
+    } else {
+      setSubmitted(true);
+    }
+    setLoading(false);
   };
 
   return (
@@ -150,12 +172,16 @@ export default function Contact() {
                   placeholder="Tell us about your freight needs..."
                 />
               </div>
+              {error && (
+                <p className="text-red-400 text-xs font-semibold">{error}</p>
+              )}
               <button
                 type="submit"
-                className="mt-2 px-8 py-4 bg-old-gold text-site-black font-poppins font-black uppercase tracking-[0.2em] text-sm rounded hover:bg-white transition-colors duration-300"
+                disabled={loading}
+                className="mt-2 px-8 py-4 bg-old-gold text-site-black font-poppins font-black uppercase tracking-[0.2em] text-sm rounded hover:bg-white transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
                 style={{ boxShadow: "0 0 20px rgba(207,181,59,0.3)" }}
               >
-                REQUEST A QUOTE
+                {loading ? "SENDING..." : "REQUEST A QUOTE"}
               </button>
             </form>
           )}
