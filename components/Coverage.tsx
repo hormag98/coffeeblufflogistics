@@ -5,15 +5,37 @@ import { useRef } from "react";
 
 const primaryRegions = ["Savannah, GA", "Port of Savannah"];
 const secondaryRegions = [
+  // Georgia
   "Brunswick, GA",
+  "Macon, GA",
   "Augusta, GA",
   "Atlanta, GA",
-  "Macon, GA",
+  // Florida
   "Jacksonville, FL",
+  "Orlando, FL",
+  "Tampa, FL",
+  "Sarasota, FL",
+  "Miami, FL",
+  "Pensacola, FL",
+  // South Carolina
+  "Myrtle Beach, SC",
   "Charleston, SC",
   "Columbia, SC",
+  // North Carolina
+  "Wilmington, NC",
   "Charlotte, NC",
+  "Greensboro, NC",
+  "Raleigh, NC",
+  // Alabama
   "Birmingham, AL",
+  "Montgomery, AL",
+  "Orange Beach, AL",
+  // Mississippi
+  "Biloxi, MS",
+  "Jackson, MS",
+  // Tennessee
+  "Chattanooga, TN",
+  "Nashville, TN",
   "And Beyond",
 ];
 
